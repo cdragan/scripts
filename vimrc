@@ -56,12 +56,8 @@ syn match InvalidEOL /\s*$/
 hi link InvalidEOL Error
 
 " MiniBufExplorer settings
-hi MBEChanged               guifg=DarkGreen
-hi link MBEVisibleNormal    Statement
-hi link MBEVisibleChanged   Statement
-let g:miniBufExplMapCTabSwitchBufs=1
-"let g:miniBufExplUseSingleClick=1
-let g:miniBufExplModSelTarget=1
+noremap <C-TAB>   :MBEbn<CR>
+noremap <C-S-TAB> :MBEbp<CR>
 
 " Home and End in MacOSX Terminal.app
 map <ESC>[H <Home>
