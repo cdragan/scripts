@@ -35,12 +35,15 @@ set autowrite
 set autoindent
 set backspace=2
 set ruler
+if has("persistent_undo")
+    set noundofile
+endif
 if version >= 800
     set scrolloff=0
 endif
 
 " Enable X mouse in xterm
-if &term == "xterm" || &term == "screen"
+if &term == "xterm" || &term[:5] == "screen"
     set mouse=
 endif
 
