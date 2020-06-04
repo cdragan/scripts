@@ -43,7 +43,7 @@ if version >= 800
 endif
 
 " Enable X mouse in xterm
-if &term == "xterm" || &term[:5] == "screen"
+if &term[:4] == "xterm" || &term[:5] == "screen"
     set mouse=
 endif
 
