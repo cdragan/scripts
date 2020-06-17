@@ -153,9 +153,9 @@ set et
 " Allow tabs in certain temporary files
 autocmd BufNewFile,BufRead *.[0-9],*.[0-9][0-9],*.[0-9][0-9][0-9] set sw=8 sts=0 noet
 
-" Highlight tails of lines which are over 80 characters long
-highlight OverLength guibg=#ffeaea ctermbg=red
-match OverLength /\%81v.*/
+" Highlight tails of lines which are over 100 characters long
+highlight OverLength guibg=#ffeaea ctermbg=darkred
+match OverLength /\%101v.*/
 
 " Recognize md files as markdown, instead of Modula-2
 autocmd BufNewFile,BufRead *.md set filetype=markdown
