@@ -42,6 +42,25 @@ if version >= 800
     set scrolloff=0
 endif
 
+" Line numbers
+let g:ChrisShowLineNumbers = 0
+function! ToggleLineNumbers()
+    let g:ChrisShowLineNumbers = ! g:ChrisShowLineNumbers
+    if g:ChrisShowLineNumbers
+        set number
+        set relativenumber
+    else
+        set nonumber
+        set norelativenumber
+    endif
+endfunction
+call ToggleLineNumbers()
+augroup RelativeNumberToggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if g:ChrisShowLineNumbers | set relativenumber | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+augroup END
+
 " Enable X mouse in xterm
 if &term[:4] == "xterm" || &term[:5] == "screen"
     set mouse=
@@ -52,7 +71,7 @@ hi Comment   ctermfg=2 guifg=DarkGreen gui=Italic
 hi Constant  guifg=Blue
 hi Statement guifg=DarkRed gui=Bold
 hi Type      guifg=DarkRed gui=Bold
-hi LineNr    guifg=Blue guibg=Gray
+hi LineNr    guifg=#A1A1F1 guibg=#E8E8E8
 
 " Highlight useless trailing spaces
 syn match InvalidEOL /\s*$/
@@ -81,10 +100,10 @@ vmap <silent> <F3> :<C-U>noh<CR>gv
 
 " F4 is mapped to CreamShowInvisibles
 
-" F5 - Switch between line wrapping modes
-nmap <silent> <F5>      :set wrap!<CR>:set number!<CR>
-imap <silent> <F5> <C-O>:set wrap!<CR><C-O>:set number!<CR>
-vmap <silent> <F5> :<C-U>set wrap!<CR>:set number!<CR>gv
+" F5 - Toggle line wrapping
+nmap <silent> <F5>      :set wrap!<CR>
+imap <silent> <F5> <C-O>:set wrap!<CR><C-O>
+vmap <silent> <F5> :<C-U>set wrap!<CR>
 
 " F6 - toggle folding
 nmap <F6> zi
