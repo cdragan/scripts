@@ -57,7 +57,7 @@ endfunction
 call ToggleLineNumbers()
 augroup RelativeNumberToggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if g:ChrisShowLineNumbers | set relativenumber | endif
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if g:ChrisShowLineNumbers && ( bufname('%') != '-MiniBufExplorer-' ) | set relativenumber | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
 augroup END
 
