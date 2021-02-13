@@ -70,8 +70,9 @@ endif
 hi Comment   ctermfg=2 guifg=DarkGreen gui=Italic
 hi Constant  guifg=Blue
 hi Statement guifg=DarkRed gui=Bold
-hi Type      guifg=DarkRed gui=Bold
+hi Type      guifg=DarkBlue
 hi LineNr    guifg=#A1A1F1 guibg=#E8E8E8
+hi Preproc   guifg=BlueViolet
 
 " Highlight useless trailing spaces
 syn match InvalidEOL /\s*$/
@@ -178,3 +179,9 @@ match OverLength /\%101v.*/
 
 " Recognize md files as markdown, instead of Modula-2
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+" Vulkan syntax highlighting
+autocmd FileType cpp,c source ~/.vim/syntax/vulkan1.0.vim
+
+" Syntax highlighting for Kos sources
+autocmd FileType cpp,c source ~/.vim/syntax/kos_c.vim
