@@ -20,6 +20,7 @@ chrisprompt() {
 export PROMPT_COMMAND="chrisprompt"
 
 if [[ $(uname) = Darwin ]]; then
+    alias ldd="otool -L"
     idle() {
         nice -n 19 "$@"
     }
