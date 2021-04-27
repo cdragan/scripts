@@ -102,9 +102,13 @@ vmap <silent> <F3> :<C-U>noh<CR>gv
 " F4 is mapped to CreamShowInvisibles
 
 " F5 - Toggle line wrapping
-nmap <silent> <F5>      :set wrap!<CR>
-imap <silent> <F5> <C-O>:set wrap!<CR><C-O>
-vmap <silent> <F5> :<C-U>set wrap!<CR>
+function! ToggleWrap()
+    set wrap!
+    call ToggleLineNumbers()
+endfunction
+nmap <silent> <F5>      :call ToggleWrap()<CR>
+imap <silent> <F5> <C-O>:call ToggleWrap()<CR><C-O>
+vmap <silent> <F5> :<C-U>call ToggleWrap()<CR>
 
 " F6 - toggle folding
 nmap <F6> zi
