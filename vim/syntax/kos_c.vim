@@ -51,7 +51,7 @@ syntax keyword kosType KOS_FUNCTION_HANDLER
 syntax keyword kosType KOS_STRING_FLAGS_E
 syntax keyword kosType KOS_STRING_FLAGS
 syntax keyword kosType KOS_MODULE_FLAGS_E
-syntax keyword kosType KOS_ARG_DESC
+syntax keyword kosType KOS_CONVERT
 syntax keyword kosType KOS_BYTECODE_INSTR
 syntax keyword kosType KOS_VECTOR
 syntax keyword kosType KOS_VECTOR_S
