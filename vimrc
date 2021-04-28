@@ -44,21 +44,36 @@ endif
 
 " Line numbers
 let g:ChrisShowLineNumbers = 0
-function! ToggleLineNumbers()
-    let g:ChrisShowLineNumbers = ! g:ChrisShowLineNumbers
-    if g:ChrisShowLineNumbers
+function! UpdateLineNumbers()
+    if g:ChrisShowLineNumbers && ( bufname('%') != '-MiniBufExplorer-' )
         set number
         set relativenumber
+        set nowrap
     else
         set nonumber
         set norelativenumber
+        set wrap
     endif
 endfunction
+function! ToggleLineNumbers()
+    let g:ChrisShowLineNumbers = ! g:ChrisShowLineNumbers
+    call UpdateLineNumbers()
+endfunction
 call ToggleLineNumbers()
+function! ShowRelativeLineNumbers()
+    call UpdateLineNumbers()
+    if g:ChrisShowLineNumbers && ( bufname('%') != '-MiniBufExplorer-' )
+        set relativenumber
+    endif
+endfunction
+function! HideRelativeLineNumbers()
+    call UpdateLineNumbers()
+    set norelativenumber
+endfunction
 augroup RelativeNumberToggle
   autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if g:ChrisShowLineNumbers && ( bufname('%') != '-MiniBufExplorer-' ) | set relativenumber | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * call ShowRelativeLineNumbers()
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * call HideRelativeLineNumbers()
 augroup END
 
 " Enable X mouse in xterm
@@ -101,14 +116,10 @@ vmap <silent> <F3> :<C-U>noh<CR>gv
 
 " F4 is mapped to CreamShowInvisibles
 
-" F5 - Toggle line wrapping
-function! ToggleWrap()
-    set wrap!
-    call ToggleLineNumbers()
-endfunction
-nmap <silent> <F5>      :call ToggleWrap()<CR>
-imap <silent> <F5> <C-O>:call ToggleWrap()<CR><C-O>
-vmap <silent> <F5> :<C-U>call ToggleWrap()<CR>
+" F5 - Toggle line numbers and wrapping
+nmap <silent> <F5>      :call ToggleLineNumbers()<CR>
+imap <silent> <F5> <C-O>:call ToggleLineNumbers()<CR><C-O>
+vmap <silent> <F5> :<C-U>call ToggleLineNumbers()<CR>
 
 " F6 - toggle folding
 nmap <F6> zi
