@@ -51,15 +51,22 @@ endif
 
 " Line numbers
 let g:ChrisShowLineNumbers = 0
+let g:gitgutter_signs = 0
 function! UpdateLineNumbers()
     if g:ChrisShowLineNumbers && ( bufname('%') != '-MiniBufExplorer-' )
         set number
         set relativenumber
         set nowrap
+        if exists("g:gitgutter_enabled")
+            call gitgutter#sign#enable()
+        endif
     else
         set nonumber
         set norelativenumber
         set wrap
+        if exists("g:gitgutter_enabled")
+            call gitgutter#sign#disable()
+        endif
     endif
 endfunction
 function! ToggleLineNumbers()
