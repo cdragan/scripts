@@ -55,6 +55,7 @@ syntax keyword kosType KOS_CONVERT
 syntax keyword kosType KOS_BYTECODE_INSTR
 syntax keyword kosType KOS_VECTOR
 syntax keyword kosType KOS_VECTOR_S
+syntax keyword kosType KOS_MEMPOOL
 syntax keyword kosType KOS_MEMPOOL_S
 syntax keyword kosType KOS_NUMERIC_TYPE_E
 syntax keyword kosType KOS_NUMERIC_VALUE_U
