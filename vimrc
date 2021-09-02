@@ -4,7 +4,7 @@ if (has("win32") || has("win64"))
 endif
 set langmenu=en
 menutranslate clear
-  
+
 " Default Vim settings
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
@@ -20,6 +20,13 @@ elseif has("gui_kde")
 else
     set guifont=Courier\ New\ 13
 endif
+if has('mac') && has('gui_running')
+    set transparency=10
+    " Fonts from https://github.com/powerline/fonts/tree/master/Meslo%20Dotted
+    set guifont=Meslo\ LG\ M\ DZ\ for\ Powerline:h13
+    let g:airline_powerline_fonts=1
+endif
+colorscheme desert
 set showcmd
 set tabstop=8
 set softtabstop=4
@@ -82,12 +89,8 @@ if &term[:4] == "xterm" || &term[:5] == "screen"
 endif
 
 " My own colors
-hi Comment   ctermfg=2 guifg=DarkGreen gui=Italic
-hi Constant  guifg=Blue
-hi Statement guifg=DarkRed gui=Bold
-hi Type      guifg=DarkBlue
-hi LineNr    guifg=#A1A1F1 guibg=#E8E8E8
-hi Preproc   guifg=BlueViolet
+hi Comment   ctermfg=2 gui=Italic
+hi LineNr    guifg=White guibg=grey30
 
 " Highlight useless trailing spaces
 syn match InvalidEOL /\s*$/
@@ -96,6 +99,20 @@ hi link InvalidEOL Error
 " MiniBufExplorer settings
 noremap <C-TAB>   :MBEbn<CR>
 noremap <C-S-TAB> :MBEbp<CR>
+let loaded_minibufexplorer = 1 " disable for now, use vim-airline instead
+
+" vim-airline settings
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show=1
+let g:airline#extensions#tabline#overflow_marker = '…'
+
+" git-gutter
+hi SignColumn            guibg=grey30
+hi GitGutterAdd          guibg=grey30 guifg=YellowGreen
+hi GitGutterChange       guibg=grey30 guifg=SkyBlue
+hi GitGutterDelete       guibg=grey30 guifg=#FFA0A0
+hi GitGutterChangeDelete guibg=grey30 guifg=#FFA0A0
 
 " Home and End in MacOSX Terminal.app
 map <ESC>[H <Home>
@@ -189,7 +206,7 @@ set et
 autocmd BufNewFile,BufRead *.[0-9],*.[0-9][0-9],*.[0-9][0-9][0-9] set sw=8 sts=0 noet
 
 " Highlight tails of lines which are over 100 characters long
-highlight OverLength guibg=#ffeaea ctermbg=darkred
+highlight OverLength guibg=OrangeRed ctermbg=darkred
 match OverLength /\%101v.*/
 
 " Recognize md files as markdown, instead of Modula-2
