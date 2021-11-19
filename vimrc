@@ -224,3 +224,6 @@ autocmd FileType cpp,c source ~/.vim/syntax/vulkan1.0.vim
 
 " Syntax highlighting for Kos sources
 autocmd FileType cpp,c source ~/.vim/syntax/kos_c.vim
+
+" Workaround annoying vim feature to force editing last file before exiting
+autocmd QuitPre * blast
