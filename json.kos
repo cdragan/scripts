@@ -51,7 +51,7 @@ fun tokenize(text)
                 }
             }
 
-            case kos.token_keyword {
+            case kos.token_keyword, kos.token_identifier {
                 if token.token in keyword_map {
                     token.value = keyword_map[token.token]
                     yield token
