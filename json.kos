@@ -1,0 +1,239 @@
+import kos
+import base: number, string
+
+const separator_map = {
+    "{": void,
+    "}": void,
+    "[": void,
+    "]": void,
+    ",": void,
+    ":": void
+}
+
+const keyword_map = {
+    "true":  true,
+    "false": false,
+    "null":  void
+}
+
+fun bad_token(token, desc = void)
+{
+    if ! ("token" in token) {
+        throw token
+    }
+    if desc {
+        desc = desc + ", but got \(token.token)"
+    }
+    else {
+        desc = "invalid JSON token: \(token.token)"
+    }
+    throw "\(token.line):\(token.column): \(desc)"
+}
+
+fun tokenize(text)
+{
+    const lexer = kos.raw_lexer(text, true)
+
+    for const token in lexer {
+        switch token.type {
+
+            case kos.token_comment, kos.token_whitespace, kos.token_eol {
+                # Ignore whitespace
+                continue
+            }
+
+            case kos.token_separator {
+                if token.token in separator_map {
+                    yield token
+                }
+                else {
+                    bad_token(token)
+                }
+            }
+
+            case kos.token_keyword {
+                if token.token in keyword_map {
+                    token.value = keyword_map[token.token]
+                    yield token
+                }
+                else {
+                    bad_token(token)
+                }
+            }
+
+            case kos.token_numeric {
+                token.value = number(token.token)
+                yield token
+            }
+
+            case kos.token_string {
+                token.value = string(token.token[1:-1])
+                yield token
+            }
+
+            default {
+                bad_token(token)
+            }
+        }
+    }
+}
+
+class json_lexer {
+    constructor(text) {
+        this.lexer  = tokenize(text)
+        this.peeked = void
+    }
+
+    fun next {
+        const peeked = this.peeked
+
+        if peeked {
+            this.peeked = void
+            return peeked
+        }
+
+        return this.lexer()
+    }
+
+    fun peek {
+        if ! this.peeked {
+            this.peeked = this.lexer()
+        }
+
+        return this.peeked
+    }
+
+    fun drain {
+        if this.peeked {
+            yield this.peeked
+            this.peeked = void
+        }
+
+        for const token in this.lexer() {
+            yield token
+        }
+    }
+}
+
+var parse_value = void
+
+fun parse_array(lexer)
+{
+    const arr = []
+
+    loop {
+
+        var token = lexer.peek()
+
+        if ! ("value" in token) {
+            if token.token == "]" {
+                lexer.next()
+                break
+            }
+            else if token.token == "," {
+                lexer.next()
+                continue
+            }
+        }
+
+        arr.push(parse_value(lexer))
+
+        token = lexer.next()
+
+        if "value" in token {
+            bad_token(token, "expected ',' or ']'")
+        }
+
+        if token.token == "]" {
+            break
+        }
+        else if token.token != "," {
+            bad_token(token, "expected ',' or ']'")
+        }
+    }
+
+    return arr
+}
+
+fun parse_object(lexer)
+{
+    const obj = { }
+
+    loop {
+
+        var token = lexer.next()
+
+        if ! ("value" in token) {
+            if token.token == "}" {
+                break
+            }
+            else if token.token == "," {
+                continue
+            }
+
+            bad_token(token, "expected string or ',' or '}'")
+        }
+
+        const key = token.value
+
+        if typeof key != "string" {
+            bad_token(token, "expected string or ',' or '}'")
+        }
+
+        token = lexer.next()
+
+        if ("value" in token) || token.token != ":" {
+            bad_token(token, "expected ':'")
+        }
+
+        obj[key] = parse_value(lexer)
+
+        token = lexer.next()
+
+        if "value" in token {
+            bad_token(token, "expected ',' or '}'")
+        }
+
+        if token.token == "}" {
+            break
+        }
+        else if token.token != "," {
+            bad_token(token, "expected ',' or '}'")
+        }
+    }
+
+    return obj
+}
+
+parse_value = fun(lexer)
+{
+    const token = lexer.next()
+
+    if "value" in token {
+        return token.value
+    }
+
+    if token.token == "[" {
+        return parse_array(lexer)
+    }
+    else if token.token == "{" {
+        return parse_object(lexer)
+    }
+    else {
+        bad_token(token)
+    }
+}
+
+public fun parse(text)
+{
+    const lexer = json_lexer(text)
+
+    const ret = parse_value(lexer)
+
+    # Drain trailing whitespace
+    for const token in lexer.drain() {
+        bad_token(token)
+    }
+
+    return ret
+}
