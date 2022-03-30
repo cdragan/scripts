@@ -1,5 +1,5 @@
 import kos
-import base: number, string
+import base: array, number, string
 
 const separator_map = {
     "{": void,
@@ -103,24 +103,21 @@ class json_lexer {
         return this.peeked
     }
 
-    fun drain {
+    fun drain_whitespace {
         if this.peeked {
-            yield this.peeked
-            this.peeked = void
+            bad_token(this.peeked)
         }
 
         for const token in this.lexer() {
-            yield token
+            bad_token(token)
         }
     }
 }
 
 var parse_value = void
 
-fun parse_array(lexer)
+fun parse_array_value(lexer)
 {
-    const arr = []
-
     loop {
 
         var token = lexer.peek()
@@ -136,7 +133,7 @@ fun parse_array(lexer)
             }
         }
 
-        arr.push(parse_value(lexer))
+        yield parse_value(lexer)
 
         token = lexer.next()
 
@@ -151,8 +148,6 @@ fun parse_array(lexer)
             bad_token(token, "expected ',' or ']'")
         }
     }
-
-    return arr
 }
 
 fun parse_object(lexer)
@@ -214,7 +209,7 @@ parse_value = fun(lexer)
     }
 
     if token.token == "[" {
-        return parse_array(lexer)
+        return array(parse_array_value(lexer))
     }
     else if token.token == "{" {
         return parse_object(lexer)
@@ -230,10 +225,24 @@ public fun parse(text)
 
     const ret = parse_value(lexer)
 
-    # Drain trailing whitespace
-    for const token in lexer.drain() {
+    lexer.drain_whitespace()
+
+    return ret
+}
+
+public fun parse_array(text)
+{
+    const lexer = json_lexer(text)
+
+    const token = lexer.next()
+
+    if ("value" in token) || (token.token != "[") {
         bad_token(token)
     }
 
-    return ret
+    for const token in parse_array_value(lexer) {
+        yield token
+    }
+
+    lexer.drain_whitespace()
 }
