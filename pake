@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2021 Chris Dragan
+
+set -e
+
+UNAME=$(uname -s)
+MAKE=make
+
+case "$UNAME" in
+    CYGWIN*|MINGW*|MSYS*)             UNAME="Windows" ;;
+    FreeBSD|OpenBSD|NetBSD|DragonFly) MAKE=gmake ;;
+esac
+
+if [ -z "$JOBS" ]; then
+    case "$UNAME" in
+        Linux)                                   JOBS="$(grep -c ^processor /proc/cpuinfo)" ;;
+        Darwin|FreeBSD|OpenBSD|NetBSD|DragonFly) JOBS="$(sysctl -n hw.ncpu)" ;;
+        Windows)                                 JOBS="$NUMBER_OF_PROCESSORS" ;;
+        Haiku|BeOS)                              JOBS="$(sysinfo | grep -c 'CPU #')" ;;
+        *)                                       JOBS=1 ;;
+    esac
+fi
+
+$MAKE -j $JOBS "$@"
