@@ -172,13 +172,19 @@ imap <F12> <Esc>@m
 nmap <C-Y> dd
 imap <C-Y> <C-O>dd
 
-" Forward (tags) with Ctrl+Enter
-nmap <C-CR> <C-]>
-imap <C-CR> <C-O><C-]>
+" Ctrl+Enter - next tag
+nnoremap <C-CR> <C-]>
+inoremap <C-CR> <C-O><C-]>
 
-" Backwards (tags) with Ctrl+Backspace
+" Ctrl+Backspace - previous tag
 nmap <C-BS> <C-T>
 imap <C-BS> <C-O><C-T>
+
+" Ctrl+N - next buffer
+noremap <silent> <C-N> :bn<CR>
+
+" Ctrl+B - previous buffer
+noremap <silent> <C-B> :bp<CR>
 
 " Increment/decrement with +/-
 nnoremap + <C-A>
