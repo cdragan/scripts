@@ -190,6 +190,12 @@ noremap <silent> <C-B> :bp<CR>
 nnoremap + <C-A>
 nnoremap - <C-X>
 
+" Remap arrow keys in visual mode to avoid losing selection
+vmap <Left>  h
+vmap <Down>  j
+vmap <Up>    k
+vmap <Right> l
+
 " Show marks settings
 let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.""
 set updatetime=250
