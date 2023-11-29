@@ -1084,6 +1084,7 @@ syntax keyword vkType PFN_vkBindBufferMemory
 syntax keyword vkType PFN_vkBindImageMemory
 syntax keyword vkType PFN_vkCmdBeginQuery
 syntax keyword vkType PFN_vkCmdBeginRenderPass
+syntax keyword vkType PFN_vkCmdBeginRenderingKHR
 syntax keyword vkType PFN_vkCmdBindDescriptorSets
 syntax keyword vkType PFN_vkCmdBindIndexBuffer
 syntax keyword vkType PFN_vkCmdBindPipeline
@@ -1105,6 +1106,7 @@ syntax keyword vkType PFN_vkCmdDrawIndexedIndirect
 syntax keyword vkType PFN_vkCmdDrawIndirect
 syntax keyword vkType PFN_vkCmdEndQuery
 syntax keyword vkType PFN_vkCmdEndRenderPass
+syntax keyword vkType PFN_vkCmdEndRenderingKHR
 syntax keyword vkType PFN_vkCmdExecuteCommands
 syntax keyword vkType PFN_vkCmdFillBuffer
 syntax keyword vkType PFN_vkCmdNextSubpass
@@ -1353,8 +1355,10 @@ syntax keyword vkFunction vkCmdWriteTimestamp
 syntax keyword vkFunction vkCmdCopyQueryPoolResults
 syntax keyword vkFunction vkCmdPushConstants
 syntax keyword vkFunction vkCmdBeginRenderPass
+syntax keyword vkFunction vkCmdBeginRenderingKHR
 syntax keyword vkFunction vkCmdNextSubpass
 syntax keyword vkFunction vkCmdEndRenderPass
+syntax keyword vkFunction vkCmdEndRenderingKHR
 syntax keyword vkFunction vkCmdExecuteCommands
 
 
