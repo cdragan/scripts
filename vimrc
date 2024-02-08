@@ -180,11 +180,11 @@ inoremap <C-CR> <C-O><C-]>
 nmap <C-BS> <C-T>
 imap <C-BS> <C-O><C-T>
 
-" Ctrl+N - next buffer
-noremap <silent> <C-N> :bn<CR>
+" Shift+L - next buffer
+noremap <silent> <S-L> :bn<CR>
 
-" Ctrl+B - previous buffer
-noremap <silent> <C-B> :bp<CR>
+" Shift+H - previous buffer
+noremap <silent> <S-H> :bp<CR>
 
 " Increment/decrement with +/-
 nnoremap + <C-A>
