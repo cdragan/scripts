@@ -1,7 +1,12 @@
+attrcolor b ".I"
+defbce "on"
 defscrollback 10000
-termcapinfo xterm*|xs|rxvt ti@:te@
-startup_message off
+#termcapinfo xterm*|xs|rxvt ti@:te@
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+term screen-256color
 hardstatus on
 hardstatus alwayslastline
 hardstatus string "%{+b gk}%?%-Lw%?%{y}[%n*%f %t]%{g}%?%+Lw%? %= %{g} %H "
+maptimeout 5
+startup_message off
 zmodem catch
