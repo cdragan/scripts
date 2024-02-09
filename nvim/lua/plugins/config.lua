@@ -1,5 +1,11 @@
 return {
     {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = "catppuccin"
+        }
+    },
+    {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
