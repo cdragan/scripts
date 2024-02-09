@@ -12,7 +12,6 @@ return {
                 "cuda",
                 "devicetree",
                 "diff",
-                "dissassembly",
                 "git_config",
                 "git_rebase",
                 "gitattributes",
