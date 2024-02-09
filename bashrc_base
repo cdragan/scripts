@@ -49,3 +49,5 @@ if [[ $(uname) = Darwin ]]; then
     alias lsusb="system_profiler SPUSBDataType"
     export GREP_OPTIONS="--color=auto"
 fi
+
+# vim:ft=bash
