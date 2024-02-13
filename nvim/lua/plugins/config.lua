@@ -1,10 +1,12 @@
 return {
+    -- Set color scheme
     {
         "LazyVim/LazyVim",
         opts = {
             colorscheme = "catppuccin"
         }
     },
+    -- Highlight TODOs without trailing colon
     {
         "folke/todo-comments.nvim",
         opts = {
@@ -17,6 +19,9 @@ return {
             },
         }
     },
+    -- Enable clangd
+    { import = "lazyvim.plugins.extras.lang.clangd" },
+    -- Configure syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
