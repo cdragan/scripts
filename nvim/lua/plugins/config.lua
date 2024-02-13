@@ -6,6 +6,18 @@ return {
         }
     },
     {
+        "folke/todo-comments.nvim",
+        opts = {
+            highlight = {
+                keyword = "wide",
+                pattern = [[.*<(KEYWORDS)>\s*]]
+            },
+            search = {
+                pattern = [[\b(KEYWORDS)\b]],
+            },
+        }
+    },
+    {
         "nvim-treesitter/nvim-treesitter",
         opts = {
             ensure_installed = {
