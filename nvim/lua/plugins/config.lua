@@ -1,9 +1,10 @@
 return {
+    { "rose-pine/neovim", name = "rose-pine" },
     -- Set color scheme
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "catppuccin"
+            colorscheme = "rose-pine"
         }
     },
     -- Highlight TODOs without trailing colon
