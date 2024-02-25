@@ -1,3 +1,0 @@
-#!/bin/sh
-
-git log --graph --all --pretty='format:%C(auto)%h %ad%d %C(auto)%s' --date=short "$@"

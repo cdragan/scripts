@@ -1,0 +1,14 @@
+[user]
+	name = Chris Dragan
+[push]
+	default = matching
+[color]
+	status = auto
+	branch = auto
+	ui = auto
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[alias]
+	loog = log --graph --all --pretty='format:%C(auto)%h %ad%d %C(auto)%s' --date=short
