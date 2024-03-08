@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Determine absolute path to the directory with scripts
+SCRIPTS=$(dirname "$0")
+[ -n "$SCRIPTS" ] || SCRIPTS=~/scripts
+SCRIPTS=$(cd -P "$SCRIPTS" && pwd)
+
+# Determine relative path to the directory with scripts
+HOMEDIR=$(cd -P ~ && pwd)
+if [ "${SCRIPTS:0:${#HOMEDIR}}" = "$HOMEDIR" ]; then
+    SCRIPTS_REL="${SCRIPTS:$((${#HOMEDIR}+1))}"
+    SCRIPTS_ABS="~/$SCRIPTS_REL"
+else
+    SCRIPTS_REL="${SCRIPTS}/"
+    SCRIPTS_ABS="$SCRIPTS"
+fi
+
+# Go to home directory
+cd -P ~
+
+# Set up bash
+[ -e .bashrc_base ] || ln -s "$SCRIPTS_REL/bashrc_base" .bashrc_base
+if [ ! -e .bashrc ]; then
+    cat > .bashrc <<EOF
+[[ -f /etc/profile.d/bash-completion ]] && source /etc/profile.d/bash-completion
+[ -e ~/.bashrc_base ] && source ~/.bashrc_base
+EOF
+fi
+if [ ! -e .bash_profile ]; then
+    cat > .bash_profile <<EOF
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+EOF
+fi
+
+# Set up Vim
+[ -e .vim ] || ln -s "$SCRIPTS_REL/vim" .vim
+[ -e .vimrc_base ] || ln -s "$SCRIPTS_REL/vimrc" .vimrc_base
+if [ ! -e .vimrc ]; then
+    cat > .vimrc <<EOF
+source ~/.vimrc_base
+EOF
+fi
+
+# Set up NeoVim
+if [ ! -e .config/nvim ]; then
+    mkdir -p .config/nvim
+    ln -s "$SCRIPTS/nvim/lua" .config/nvim/lua
+fi
+if [ ! -e .config/nvim/init.lua ]; then
+    cat > .config/nvim/init.lua <<EOF
+require('init_base')
+EOF
+fi
+
+# Set up git
+if [ ! -e .gitconfig ]; then
+    cat > .gitconfig <<EOF
+[include]
+        path = $SCRIPTS_ABS/gitconfig
+[user]
+        email = chris@dragan.dev
+[core]
+        # Change to nvim
+        editor = vim
+EOF
+fi
+
+# Set up gdb
+[ -e .gdbinit ] || ln -s "$SCRIPTS_REL/gdbinit" .gdbinit
+
+# Set up GNU screen
+[ -e .screenrc ] || ln -s "$SCRIPTS_REL/screenrc" .screenrc
+
+# Set up tmux
+[ -e .tmux.conf ] || ln -s "$SCRIPTS_REL/tmux.conf" .tmux.conf

@@ -24,6 +24,8 @@ if [[ $(uname) = Darwin ]]; then
     idle() {
         nice -n 19 "$@"
     }
+    # Suppress zsh message
+    export BASH_SILENCE_DEPRECATION_WARNING=1
 else
     idle() {
         nice -n 19 ionice -c 3 "$@"
