@@ -55,6 +55,7 @@ EOF
 fi
 
 # Set up git
+[ -e .gitconfig_base ] || ln -s "$SCRIPTS_REL/gitconfig_base" .gitconfig_base
 if [ ! -e .gitconfig ]; then
     cat > .gitconfig <<EOF
 [include]
