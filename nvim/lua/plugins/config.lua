@@ -1,6 +1,14 @@
 return {
-    { "rose-pine/neovim", name = "rose-pine" },
     -- Set color scheme
+    {
+        "rose-pine/neovim",
+        name = "rose-pine",
+        opts = {
+            styles = {
+                italic = false
+            }
+        }
+    },
     {
         "LazyVim/LazyVim",
         opts = {
@@ -124,4 +132,19 @@ return {
             })
         end,
     },
+    -- tmux integration
+    {
+        "alexghergh/nvim-tmux-navigation",
+        opts = {
+            disable_when_zoomed = true,
+            keybindings = {
+                left = "<C-h>",
+                down = "<C-j>",
+                up = "<C-k>",
+                right = "<C-l>",
+                last_active = "<C-\\>",
+                next = "<C-Space>",
+            }
+        }
+    }
 }
