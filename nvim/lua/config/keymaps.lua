@@ -14,3 +14,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up", norem
 
 -- Join lines and restore cursor position
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines", noremap = true })
+
+-- Integration with tmux
+vim.keymap.set('n', '<C-h>', require("nvim-tmux-navigation").NvimTmuxNavigateLeft,  { desc = "Go to left pane" })
+vim.keymap.set('n', '<C-j>', require("nvim-tmux-navigation").NvimTmuxNavigateDown,  { desc = "Go to pane below" })
+vim.keymap.set('n', '<C-k>', require("nvim-tmux-navigation").NvimTmuxNavigateUp,    { desc = "Go to pane above" })
+vim.keymap.set('n', '<C-l>', require("nvim-tmux-navigation").NvimTmuxNavigateRight, { desc = "Go to right pane" })
