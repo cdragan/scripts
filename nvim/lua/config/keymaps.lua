@@ -2,8 +2,10 @@
 vim.keymap.set('n', '\\<C-s>', ':w<CR>', { desc = "Save current buffer", noremap = true, silent = true })
 vim.keymap.set('i', '\\<C-s>', '<Esc>:w<CR>a', { desc = "Save current buffer", noremap = true, silent = true })
 
--- Show list of current buffer symbols in telescope
-vim.keymap.set('n', '<leader>fs', require("telescope.builtin").lsp_document_symbols, { desc = "Find Symbols" })
+-- Remap <leader>ss to configure wider symbol column
+vim.keymap.set("n", "<leader>ss",
+    function() require("telescope.builtin").lsp_document_symbols({symbol_width = 60}) end,
+    { desc = "Find Symbols" })
 
 -- Paste over selection without affecting clipboard contents
 vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste over selection" })
