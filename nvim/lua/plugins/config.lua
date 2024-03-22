@@ -1,4 +1,9 @@
 return {
+    -- Disable annoying automatic pairing
+    {
+        "echasnovski/mini.pairs",
+        enabled = false
+    },
     -- Set color scheme
     {
         "rose-pine/neovim",
