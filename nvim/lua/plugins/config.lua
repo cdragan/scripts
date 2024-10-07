@@ -4,6 +4,11 @@ return {
         "echasnovski/mini.pairs",
         enabled = false
     },
+    -- Disable autofill suggestions
+    {
+        "garymjr/nvim-snippets",
+        enabled = false
+    },
     -- Set color scheme
     {
         "rose-pine/neovim",
@@ -106,9 +111,7 @@ return {
             local cmp = require("cmp")
 
             opts.preselect = cmp.PreselectMode.None
-            opts.completion = {
-                completeopt = "noselect",
-            }
+            opts.completion = vim.tbl_extend("force", opts.completion, { autocomplete = false, completeopt = "noselect" })
 
             opts.mapping = vim.tbl_extend("force", opts.mapping, {
                 ["<Tab>"] = cmp.mapping(function(fallback)
