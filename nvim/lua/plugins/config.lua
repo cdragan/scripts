@@ -44,6 +44,10 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
+            -- Disable annoying C++ indentation in namespaces etc.
+            indent = {
+                enable = false
+            },
             ensure_installed = {
                 "awk",
                 "bash",
