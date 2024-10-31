@@ -1,12 +1,3 @@
-
-# colors for ls, etc.
-if [[ $(uname) = Darwin ]]; then
-    alias ls="ls -G"
-    alias ll="ls -G -l"
-else
-    alias ls="ls --color=auto"
-    alias ll="ls --color -l"
-fi
 alias q="exit"
 
 CHRIS_PROMPT_COLOR_ERROR=${CHRIS_PROMPT_COLOR_ERROR:-"1;31"}
@@ -23,38 +14,50 @@ chrisprompt() {
 }
 export PROMPT_COMMAND="chrisprompt"
 
-if [[ $(uname) = Darwin ]]; then
-    alias ldd="otool -L"
-    idle() {
-        nice -n 19 "$@"
-    }
-    # Suppress zsh message
-    export BASH_SILENCE_DEPRECATION_WARNING=1
-else
-    idle() {
-        nice -n 19 ionice -c 3 "$@"
-    }
-fi
-
 setwindowtitle() {
     echo -en "\033k$@\033\\"
 }
-
-alias essh="et -c 'screen -RR -D'"
 
 export HISTSIZE="10000"
 export HISTFILESIZE="$HISTSIZE"
 
 export P4CONFIG=".p4config"
 
-# Other Mac-specific options
+# MacOS-specific options
 if [[ $(uname) = Darwin ]]; then
+    alias ls="ls -G"
+    alias ll="ls -G -l"
+
+    alias ldd="otool -L"
+
+    idle() {
+        nice -n 19 "$@"
+    }
+
+    # Suppress zsh message
+    export BASH_SILENCE_DEPRECATION_WARNING=1
+
     if test -x /Applications/MacVim.app/Contents/MacOS/Vim; then
         alias edit="/Applications/MacVim.app/Contents/MacOS/Vim --remote-silent"
     fi
+
     alias lsusb="system_profiler SPUSBDataType"
+
     export GREP_OPTIONS="--color=auto"
+
     [[ $(uname -m) = arm64 ]] && [[ -d /opt/homebrew/bin ]] && export PATH="/opt/homebrew/bin:$PATH"
+fi
+
+# Linux-specific options
+if [[ $(uname) = Linux ]]; then
+    alias psu="ps -eHo pid,user,nice,cmd"
+
+    idle() {
+        nice -n 19 ionice -c 3 "$@"
+    }
+
+    alias ls="ls --color=auto"
+    alias ll="ls --color -l"
 fi
 
 # vim:ft=bash
