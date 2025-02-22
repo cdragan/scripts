@@ -18,4 +18,4 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         end
     end,
 })
-vim.cmd("highlight BadCharHighlight ctermbg=red guibg=red")
+vim.cmd("highlight BadCharHighlight ctermbg=red guibg=#eb6f92")
