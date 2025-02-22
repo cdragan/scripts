@@ -102,6 +102,7 @@ return {
         end,
     },
     -- Setup SuperTab in Cmp
+    -- TODO this legacy plugin is now disabled, remove this
     {
         "hrsh7th/nvim-cmp",
         opts = function(_, opts)
@@ -142,6 +143,13 @@ return {
                     end
                 end, { "i", "s" }),
             })
+        end,
+    },
+    -- Setup SuperTab
+    {
+        "Saghen/blink.cmp",
+        opts = function(_, opts)
+            opts.keymap.preset = "super-tab"
         end,
     },
     -- tmux integration
