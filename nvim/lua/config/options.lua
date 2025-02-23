@@ -14,7 +14,10 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     callback = function()
         -- Enable highlighting bad characters only in "real" files
         if vim.bo.buftype == "" and vim.bo.filetype ~= "dashboard" and vim.bo.filetype ~= "nofile" then
-            vim.cmd("match BadCharHighlight /\\t\\|\\s\\+$/")
+            vim.fn.clearmatches()
+            vim.fn.matchadd("BadCharHighlight", "/\\t\\|\\s\\+$/")
+        else
+            vim.fn.clearmatches()
         end
     end,
 })
