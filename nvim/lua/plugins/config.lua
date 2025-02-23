@@ -38,8 +38,6 @@ return {
             },
         }
     },
-    -- Enable clangd
-    { import = "lazyvim.plugins.extras.lang.clangd" },
     -- Configure syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
