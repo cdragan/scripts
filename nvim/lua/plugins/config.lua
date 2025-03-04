@@ -9,6 +9,11 @@ return {
         "garymjr/nvim-snippets",
         enabled = false
     },
+    -- Disable annoying snippets
+    {
+        "L3MON4D3/LuaSnip",
+        enabled = false
+    },
     -- Set color scheme
     {
         "rose-pine/neovim",
@@ -92,13 +97,6 @@ return {
             },
         },
     },
-    -- Disable default behavior for <Tab> and <S-Tab>
-    {
-        "L3MON4D3/LuaSnip",
-        keys = function()
-            return {}
-        end,
-    },
     -- Setup SuperTab in Cmp
     -- TODO this legacy plugin is now disabled, remove this
     {
@@ -147,6 +145,7 @@ return {
     {
         "saghen/blink.cmp",
         opts = function(_, opts)
+            opts.sources = { default = { 'buffer', 'lsp', 'path' }, }
             opts.keymap.preset = "super-tab"
         end,
     },
