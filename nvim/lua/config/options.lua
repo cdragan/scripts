@@ -6,7 +6,7 @@ vim.opt.virtualedit = "all"
 vim.opt.clipboard = "unnamedplus"
 vim.g.autoformat = false
 vim.g.root_spec = { { ".clangd", ".p4config", ".git", "lua" }, "cwd" }
-vim.b.snacks_animate = false
+vim.g.snacks_animate = false
 vim.filetype.add({ extension = { kos = "kos" } })
 
 -- Highlight tabs and trailing spaces characters in red
