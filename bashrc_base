@@ -14,8 +14,8 @@ chrisprompt() {
 }
 export PROMPT_COMMAND="chrisprompt"
 
-setwindowtitle() {
-    echo -en "\033k$@\033\\"
+settitle() {
+    echo -en "\033]0;$@\007"
 }
 
 export HISTSIZE="10000"
