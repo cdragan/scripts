@@ -156,7 +156,10 @@ return {
         "saghen/blink.cmp",
         opts = function(_, opts)
             opts.sources = { default = { 'buffer', 'lsp', 'path' }, }
-            opts.keymap.preset = "super-tab"
+            opts.keymap = {
+                preset = "default",
+                ["<Tab>"] = { "accept", "fallback" },
+            }
         end,
     },
     -- tmux integration
