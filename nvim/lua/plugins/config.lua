@@ -1,7 +1,7 @@
 return {
     -- Disable annoying automatic pairing
     {
-        "echasnovski/mini.pairs",
+        "nvim-mini/mini.pairs",
         enabled = false
     },
     -- Disable autofill suggestions
