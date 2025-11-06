@@ -10,7 +10,9 @@ chrisprompt() {
     [ $ERR -ne 0 ] && PS1ERROR="RC: $ERR\n"
     local WINNO=""
     [ "$WINDOW" ] && WINNO="[$WINDOW] "
-    export PS1="\[\033[${CHRIS_PROMPT_COLOR_ERROR}m\]$PS1ERROR\n\[\033[${CHRIS_PROMPT_COLOR}m\][\t] \[\033[${CHRIS_PROMPT_COLOR_WIN}m\]$WINNO\[\033[${CHRIS_PROMPT_COLOR_USER}m\]\u\[\033[${CHRIS_PROMPT_COLOR}m\]@\h \[\033[${CHRIS_PROMPT_COLOR_USER}m\]\w\[\033[0m\]\n\[\033[1m\]└─▶\[\033[0m\] "
+    local NUMJOBS=""
+    [ $(jobs | wc -l) -gt 0 ] && NUMJOBS="[\j jobs] "
+    export PS1="\[\033[${CHRIS_PROMPT_COLOR_ERROR}m\]$PS1ERROR\n\[\033[${CHRIS_PROMPT_COLOR}m\][\t] \[\033[${CHRIS_PROMPT_COLOR_WIN}m\]$NUMJOBS\[\033[${CHRIS_PROMPT_COLOR_WIN}m\]$WINNO\[\033[${CHRIS_PROMPT_COLOR_USER}m\]\u\[\033[${CHRIS_PROMPT_COLOR}m\]@\h \[\033[${CHRIS_PROMPT_COLOR_USER}m\]\w\[\033[0m\]\n\[\033[1m\]└─▶\[\033[0m\] "
 }
 export PROMPT_COMMAND="chrisprompt"
 
