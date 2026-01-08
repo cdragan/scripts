@@ -56,9 +56,6 @@ return {
     -- Configure syntax highlighting
     {
         "nvim-treesitter/nvim-treesitter",
-        -- Install from fork
-        url = "https://github.com/kos-lang/nvim-treesitter",
-        branch = "kos",
         opts = {
             -- Disable annoying C++ indentation in namespaces etc.
             indent = {
