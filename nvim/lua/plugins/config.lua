@@ -25,9 +25,21 @@ return {
         }
     },
     {
+        "vague-theme/vague.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = {
+                strings = "none",
+                keyword_return = "none"
+            }
+        }
+    },
+    {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "rose-pine"
+            -- colorscheme = "rose-pine"
+            colorscheme = "vague"
         }
     },
     -- Highlight TODOs without trailing colon
