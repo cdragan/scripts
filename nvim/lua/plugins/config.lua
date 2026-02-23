@@ -45,6 +45,7 @@ return {
     -- Highlight TODOs without trailing colon
     {
         "folke/todo-comments.nvim",
+        enabled = false, -- disable due to some bug and errors in this plugin
         opts = {
             highlight = {
                 keyword = "wide",
