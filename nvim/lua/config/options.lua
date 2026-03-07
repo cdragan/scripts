@@ -20,4 +20,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
         end
     end,
 })
-vim.cmd("highlight BadCharHighlight ctermbg=red guibg=#eb6f92")
+local function set_bad_char_highlight()
+    vim.cmd("highlight BadCharHighlight ctermbg=red guibg=#eb6f92")
+end
+set_bad_char_highlight()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_bad_char_highlight })
+
+-- Reload file if it changed outside of NeoVim
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
+                            { command = "checktime", })

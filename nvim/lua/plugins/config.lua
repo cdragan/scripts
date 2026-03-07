@@ -176,6 +176,13 @@ return {
             }
         end,
     },
+    -- Disable indent scope lines
+    {
+        "folke/snacks.nvim",
+        opts = {
+            indent = { enabled = false },
+        },
+    },
     -- tmux integration
     {
         "alexghergh/nvim-tmux-navigation",
