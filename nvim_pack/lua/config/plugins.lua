@@ -38,10 +38,6 @@ vim.pack.add({
     { src = gh("saghen/blink.cmp"), version = vim.version.range("1.0") },
     gh("rafamadriz/friendly-snippets"),
 
-    -- Formatting and linting
-    gh("stevearc/conform.nvim"),
-    gh("mfussenegger/nvim-lint"),
-
     -- Coding
     gh("nvim-mini/mini.ai"),
     gh("folke/lazydev.nvim"),
@@ -225,17 +221,6 @@ require("blink.cmp").setup({
     fuzzy = {
         implementation = "lua",
     },
-})
-
--- Formatting and linting -----------------------------------------------------
-
-require("conform").setup({})
-
--- nvim-lint has no setup(); trigger linting on save
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-        require("lint").try_lint()
-    end,
 })
 
 -- Coding ---------------------------------------------------------------------

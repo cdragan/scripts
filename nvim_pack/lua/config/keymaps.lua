@@ -150,7 +150,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("n", "<leader>ca", vim.lsp.buf.code_action, "Code action")
         map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
         map("n", "<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
-        map("n", "<leader>cf", function() require("conform").format({ bufnr = buf }) end, "Format")
+        map("n", "<leader>cf", function() vim.lsp.buf.format({ bufnr = buf }) end, "Format")
     end,
 })
 
