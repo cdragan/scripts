@@ -1,3 +1,5 @@
+-- Plugins --------------------------------------------------------------------
+
 local gh = function(repo) return "https://github.com/" .. repo end
 
 vim.pack.add({
@@ -17,7 +19,6 @@ vim.pack.add({
 
     -- Editor
     gh("folke/flash.nvim"),
-    gh("MagicDuck/grug-far.nvim"),
     gh("lewis6991/gitsigns.nvim"),
     gh("folke/persistence.nvim"),
 
@@ -99,8 +100,6 @@ require("flash").setup({
         },
     },
 })
-
-require("grug-far").setup({})
 
 require("gitsigns").setup({})
 
@@ -192,7 +191,7 @@ require("nvim-ts-autotag").setup({})
 
 require("ts-comments").setup({})
 
--- LSP (using NeoVim 0.12 native vim.lsp.config) -----------------------------
+-- LSP -----------------------------------------------------------------------
 
 vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never" },
