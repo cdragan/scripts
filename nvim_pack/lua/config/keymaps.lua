@@ -128,10 +128,6 @@ vim.keymap.set("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagn
 vim.keymap.set("n", "<leader>ft", function() Snacks.terminal() end, { desc = "Terminal" })
 vim.keymap.set("n", "<C-/>", function() Snacks.terminal() end, { desc = "Terminal" })
 
--- Search and replace ---------------------------------------------------------
-
-vim.keymap.set("n", "<leader>sr", function() require("grug-far").open() end, { desc = "Search and replace" })
-
 -- LSP keymaps (set up via LspAttach autocmd) ---------------------------------
 
 vim.api.nvim_create_autocmd("LspAttach", {
