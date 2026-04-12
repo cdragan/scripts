@@ -32,7 +32,6 @@ vim.pack.add({
 
     -- LSP
     gh("p00f/clangd_extensions.nvim"),
-    gh("mason-org/mason.nvim"),
 
     -- Completion (pin to v1.x for pre-built fuzzy matching binary)
     { src = gh("saghen/blink.cmp"), version = vim.version.range("1.0") },
@@ -194,8 +193,6 @@ require("nvim-ts-autotag").setup({})
 require("ts-comments").setup({})
 
 -- LSP (using NeoVim 0.12 native vim.lsp.config) -----------------------------
-
-require("mason").setup({})
 
 vim.lsp.config("clangd", {
     cmd = { "clangd", "--header-insertion=never" },
