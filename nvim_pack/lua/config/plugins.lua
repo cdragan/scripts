@@ -32,6 +32,7 @@ vim.pack.add({
     gh("folke/ts-comments.nvim"),
 
     -- LSP
+    gh("stevearc/aerial.nvim"),
     gh("p00f/clangd_extensions.nvim"),
 
     -- Completion (pin to v1.x for pre-built fuzzy matching binary)
@@ -58,7 +59,19 @@ vim.cmd.colorscheme("vague")
 
 -- UI -------------------------------------------------------------------------
 
-require("lualine").setup({})
+require("aerial").setup({
+    backends = { "lsp", "treesitter" },
+    attach_mode = "global",
+})
+
+require("lualine").setup({
+    sections = {
+        lualine_c = {
+            "filename",
+            "aerial",
+        },
+    },
+})
 
 require("bufferline").setup({})
 
