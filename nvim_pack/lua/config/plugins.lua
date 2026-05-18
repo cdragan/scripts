@@ -131,6 +131,18 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- Update kos parser
+vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+callback = function()
+    require('nvim-treesitter.parsers').kos = {
+        install_info = {
+            url = "https://github.com/kos-lang/tree-sitter-kos",
+            revision = "main",
+            files = { "src/parser.c" },
+        },
+    }
+end})
+
 -- Install parsers on demand via :TSInstall or manually with:
 -- require("nvim-treesitter").install({ "c", "cpp", "lua", ... })
 local ts_langs = {
