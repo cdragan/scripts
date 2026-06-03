@@ -1,7 +1,7 @@
 [user]
 	name = Chris Dragan
 [push]
-	default = matching
+	default = upstream
 [color]
 	status = auto
 	branch = auto
