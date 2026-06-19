@@ -4,8 +4,8 @@ local gh = function(repo) return "https://github.com/" .. repo end
 
 vim.pack.add({
     -- Colorschemes
-    gh("vague-theme/vague.nvim"),
-    --gh("rose-pine/neovim"),
+    --gh("vague-theme/vague.nvim"),
+    gh("rose-pine/neovim"),
 
     -- UI
     gh("nvim-lualine/lualine.nvim"),
@@ -49,13 +49,20 @@ vim.pack.add({
 
 -- Colorscheme ----------------------------------------------------------------
 
-require("vague").setup({
+-- require("vague").setup({
+--     style = {
+--         strings = "none",
+--         keyword_return = "none",
+--     },
+-- })
+-- vim.cmd.colorscheme("vague")
+require("rose-pine").setup({
     style = {
         strings = "none",
         keyword_return = "none",
     },
 })
-vim.cmd.colorscheme("vague")
+vim.cmd.colorscheme("rose-pine")
 
 -- UI -------------------------------------------------------------------------
 
