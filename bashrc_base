@@ -25,6 +25,8 @@ export HISTFILESIZE="$HISTSIZE"
 
 export P4CONFIG=".p4config"
 
+[[ -d ~/.cargo/bin ]] && export PATH="$PATH:~/.cargo/bin"
+
 # MacOS-specific options
 if [[ $(uname) = Darwin ]]; then
     alias ls="ls -G"
