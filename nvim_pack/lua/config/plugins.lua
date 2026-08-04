@@ -189,6 +189,7 @@ local ts_langs = {
     "query",
     "regex",
     "rst",
+    "rust",
     "ssh_config",
     "strace",
     "todotxt",
@@ -219,7 +220,13 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
-require("nvim-ts-autotag").setup({})
+-- The plugin also claims rust, where a missing parser makes get_parser return nil
+-- and its InsertLeave rename handler error out, aborting the buffer write.
+require("nvim-ts-autotag").setup({
+    per_filetype = {
+        rust = { enable_rename = false },
+    },
+})
 
 require("ts-comments").setup({})
 
