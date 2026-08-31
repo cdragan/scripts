@@ -46,3 +46,13 @@ vim.api.nvim_create_autocmd("ColorScheme", { callback = set_bad_char_highlight }
 -- Reload file if it changed outside of NeoVim
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
                             { command = "checktime" })
+
+-- Restore cursor position when reopening files
+vim.api.nvim_create_autocmd("BufReadPost", {
+    callback = function()
+        local pos = vim.api.nvim_buf_get_mark(0, '"');
+        if pos[1] > 0 and pos[1] <= vim.api.nvim_buf_line_count(0) then
+            vim.api.nvim_win_set_cursor(0, pos)
+        end
+    end
+})
