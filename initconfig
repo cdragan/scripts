@@ -46,12 +46,10 @@ fi
 # Set up NeoVim
 if [ ! -e .config/nvim ]; then
     mkdir -p .config/nvim
-    ln -s "$SCRIPTS/nvim/lua" .config/nvim/lua
+    ln -s "$SCRIPTS/nvim_pack/lua" .config/nvim/lua
 fi
 if [ ! -e .config/nvim/init.lua ]; then
-    cat > .config/nvim/init.lua <<EOF
-require('init_base')
-EOF
+    cp "$SCRIPTS/nvim_pack/init.lua" .config/nvim/
 fi
 
 # Set up git
