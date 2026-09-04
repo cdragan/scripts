@@ -118,9 +118,9 @@ vim.keymap.set("n", "<leader>e", function() Snacks.explorer() end, { desc = "Fil
 -- UI toggles -----------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>un", function() Snacks.notifier.hide() end, { desc = "Dismiss notifications" })
-vim.keymap.set("n", "<leader>uw", function() Snacks.toggle("wrap"):toggle() end, { desc = "Toggle word wrap" })
-vim.keymap.set("n", "<leader>uL", function() Snacks.toggle("relativenumber"):toggle() end, { desc = "Toggle relative numbers" })
-vim.keymap.set("n", "<leader>ul", function() Snacks.toggle("number"):toggle() end, { desc = "Toggle line numbers" })
+vim.keymap.set("n", "<leader>uw", function() Snacks.toggle.option("wrap"):toggle() end, { desc = "Toggle word wrap" })
+vim.keymap.set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber"):toggle() end, { desc = "Toggle relative numbers" })
+vim.keymap.set("n", "<leader>ul", function() Snacks.toggle.option("number"):toggle() end, { desc = "Toggle line numbers" })
 vim.keymap.set("n", "<leader>ud", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, { desc = "Toggle diagnostics" })
 
 -- Terminal -------------------------------------------------------------------
