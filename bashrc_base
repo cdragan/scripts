@@ -45,7 +45,7 @@ if [[ $(uname) = Darwin ]]; then
         alias edit="/Applications/MacVim.app/Contents/MacOS/Vim --remote-silent"
     fi
 
-    alias lsusb="system_profiler SPUSBDataType"
+    alias lsusb="system_profiler SPUSBHostDataType"
 
     export GREP_OPTIONS="--color=auto"
 
