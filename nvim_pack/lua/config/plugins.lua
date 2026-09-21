@@ -77,6 +77,9 @@ require("lualine").setup({
             "filename",
             "aerial",
         },
+        lualine_z = {
+            { function() return string.format("%d:%d", vim.fn.line("."), vim.fn.virtcol(".")) end },
+        },
     },
 })
 
