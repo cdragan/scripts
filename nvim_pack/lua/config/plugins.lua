@@ -78,7 +78,11 @@ require("lualine").setup({
             "aerial",
         },
         lualine_z = {
-            { function() return string.format("%d:%d", vim.fn.line("."), vim.fn.virtcol(".")) end },
+            {
+                function()
+                    return string.format("%d:%d", vim.fn.line("."), vim.fn.virtcol("."))
+                end
+            },
         },
     },
 })
@@ -119,7 +123,8 @@ MiniIcons.mock_nvim_web_devicons()
 require("flash").setup({
     modes = {
         char = {
-            multi_line = false,
+            enabled = false, -- flash f/t jumps break dot-repeat
+            multi_line = false
         },
     },
 })
